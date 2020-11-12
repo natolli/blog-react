@@ -21,6 +21,7 @@ export const NavbarContainer = styled.div`
 export const RightNavContainer = styled.ul`
   display: flex;
   flex-flow: row nowrap;
+
   .links {
     padding: 18px 10px;
   }
@@ -28,10 +29,11 @@ export const RightNavContainer = styled.ul`
     color: ${defaultTheme.tertiaryColor};
     font-weight: 300;
     font-size: 1.4rem;
+    outline: none;
   }
   @media (max-width: 768px) {
     flex-flow: column nowrap;
-    background-color: #0d2538;
+    background-color: ${defaultTheme.secondaryColor};
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
@@ -40,6 +42,7 @@ export const RightNavContainer = styled.ul`
     width: 300px;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
+    z-index: 19;
     .link {
       color: #fff;
     }
@@ -63,7 +66,8 @@ export const StyledBurger = styled.div`
   .burger-item {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${defaultTheme.tertiaryColor};
+    background-color: ${({ open }) =>
+      open ? defaultTheme.tertiaryColor : defaultTheme.secondaryColor};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;

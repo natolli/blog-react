@@ -1,3 +1,3 @@
 # Deep
 
-This project was development.
+This project is in development.
