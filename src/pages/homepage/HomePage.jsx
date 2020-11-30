@@ -4,6 +4,7 @@ import { ShowCase, Cards, ShowCaseContainer } from "./Homepage.styles";
 import { ShowCaseSvg } from "../../assets/showcase";
 import HomeCard from "../../components/homeCard/HomeCard";
 import { HomeCard1, HomeCard2 } from "../../assets";
+import Button from "../../components/button/Button";
 
 const HomePage = () => {
   return (
@@ -13,7 +14,7 @@ const HomePage = () => {
           <ShowCaseContainer>
             <div className="content">
               <h1 className="title">Post Blogs And Connect With Others.</h1>
-              <button>Get Started</button>
+              <Button modifiers="primaryTransparent">Get Started</Button>
             </div>
             <ShowCaseSvg />
           </ShowCaseContainer>

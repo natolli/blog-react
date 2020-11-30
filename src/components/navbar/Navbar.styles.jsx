@@ -22,6 +22,11 @@ export const RightNavContainer = styled.ul`
   display: flex;
   flex-flow: row nowrap;
 
+  .name {
+    color: white;
+    margin-right: 20px;
+  }
+
   .links {
     padding: 18px 10px;
   }
