@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import TextField from "../textField/TextField";
 import InputButton from "../button/InputButton";
 import { SignUpContainer } from "./Signup.styles";
-// import Alert from "../alert/Alert";
-// import { useQuery, useMutation } from "@apollo/client";
-// import { Register } from "../../graphql/mutation/register.js";
+import Alert from "../alert/Alert";
+import { useMutation } from "@apollo/client";
+import { REGISTER } from "../../graphql/mutation/register.js";
+import Loader from "../loader/Loader";
+import { Redirect } from "react-router-dom";
+
 const SignUp = ({ setNewAccount }) => {
-  // const [{}] = useQuery(Register);
+  const [register, { data, loading, error }] = useMutation(REGISTER);
   const [signUpForm, setSignUpForm] = useState({
     firstName: "",
     lastName: "",
@@ -16,9 +19,38 @@ const SignUp = ({ setNewAccount }) => {
 
   const { email, password, firstName, lastName } = signUpForm;
 
-  const handleSubmit = () => {
-    console.log("Register Submitted");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    register({
+      variables: { data: signUpForm },
+    }).catch((e) => console.log(e));
   };
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <>
+        <SignUp />
+        <Alert>Error 404</Alert>
+      </>
+    );
+  }
+  if (data && data.register.error !== null) {
+    return (
+      <>
+        <SignUp />
+        <Alert>{data.register.error}</Alert>
+      </>
+    );
+  }
+
+  if (data && data.register.user !== null) {
+    return <Redirect to="/user/confirm" />;
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,7 +105,7 @@ const SignUp = ({ setNewAccount }) => {
       <InputButton
         type="submit"
         modifiers={["rounded", "secondary"]}
-        onClick={() => handleSubmit()}
+        onClick={(e) => handleSubmit(e)}
       >
         Sign Up
       </InputButton>

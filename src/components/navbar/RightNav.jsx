@@ -35,6 +35,7 @@ const RightNav = ({ open }) => {
   }
   if (logout.data && logout.data.logout === true) {
     console.log(logout);
+
     return <Redirect to="/" />;
   }
   if (loading) {

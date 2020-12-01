@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextField from "../textField/TextField";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { SignInContainer } from "./Signin.styles";
 import { LOGIN } from "../../graphql/mutation/login";
 import InputButton from "../button/InputButton";
@@ -21,8 +21,6 @@ const SignIn = ({ setNewAccount }) => {
       });
     },
   });
-
-  const history = useHistory();
 
   const [signInForm, setSignInForm] = useState({
     email: "",
@@ -46,14 +44,6 @@ const SignIn = ({ setNewAccount }) => {
       <>
         <SignIn />
         <Alert>Error 404</Alert>
-      </>
-    );
-  }
-  if (data && data.login.error !== null) {
-    return (
-      <>
-        <SignIn />
-        <Alert>{data.login.error}</Alert>
       </>
     );
   }
