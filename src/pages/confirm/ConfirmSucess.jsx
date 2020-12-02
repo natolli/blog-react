@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CONFIRM } from "../../graphql/mutation/confirm";
-import { ConfirmConatiner } from "./Confirm.styles";
 import { ConfirmSucessSvg } from "../../assets/confirmSucess";
+import Info from "../../components/info/Info";
 
 const ConfirmSucess = () => {
   const { confirmId } = useParams();
@@ -36,7 +36,7 @@ const ConfirmSucess = () => {
     body = <h1>404 | Error</h1>;
   }
 
-  return <ConfirmConatiner>{body}</ConfirmConatiner>;
+  return <Info>{body}</Info>;
 };
 
 export default ConfirmSucess;

@@ -1,13 +1,13 @@
 import React from "react";
 import { NotFoundImage } from "../../assets/notFoundImage";
-import { NotFoundConatiner } from "./NotFound.styles";
+import Info from "../../components/info/Info";
 
 const NotFound = () => {
   return (
-    <NotFoundConatiner>
+    <Info>
       <NotFoundImage />
       <h1 className="title">404 | Page Not Found</h1>
-    </NotFoundConatiner>
+    </Info>
   );
 };
 

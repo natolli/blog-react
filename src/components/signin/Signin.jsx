@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextField from "../textField/TextField";
-import { Link, Redirect } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { SignInContainer } from "./Signin.styles";
 import { LOGIN } from "../../graphql/mutation/login";
 import InputButton from "../button/InputButton";
@@ -8,8 +8,9 @@ import { useMutation } from "@apollo/client";
 import Loader from "../loader/Loader";
 import Alert from "../alert/Alert";
 import { ME } from "../../graphql/queries/me";
+import { FORGOT_PASSWORD } from "../../graphql/mutation/forgotPassword";
 
-const SignIn = ({ setNewAccount }) => {
+const SignIn = ({ setNewAccount, history }) => {
   const [loginUser, { data, loading, error }] = useMutation(LOGIN, {
     errorPolicy: "none",
     update(cache, { data: { login } }) {
@@ -21,6 +22,15 @@ const SignIn = ({ setNewAccount }) => {
       });
     },
   });
+
+  const [
+    forgotPasswordEmail,
+    {
+      data: forgotPasswordData,
+      loading: forgotPasswordLoading,
+      error: forgotPasswordError,
+    },
+  ] = useMutation(FORGOT_PASSWORD);
 
   const [signInForm, setSignInForm] = useState({
     email: "",
@@ -35,11 +45,20 @@ const SignIn = ({ setNewAccount }) => {
     });
   };
 
-  if (loading) {
+  const forgotPassword = () => {
+    if (email === "") {
+      return;
+    }
+    forgotPasswordEmail({
+      variables: { email: email },
+    });
+  };
+
+  if (loading || forgotPasswordLoading) {
     return <Loader />;
   }
 
-  if (error) {
+  if (error || forgotPasswordError) {
     return (
       <>
         <SignIn />
@@ -59,6 +78,9 @@ const SignIn = ({ setNewAccount }) => {
 
   if (data && data.login.user !== null) {
     return <Redirect to="/posts" />;
+  }
+  if (forgotPasswordData && forgotPasswordData.forgotPassword === true) {
+    history.push("/user/change-password");
   }
 
   const handleChange = (e) => {
@@ -89,7 +111,9 @@ const SignIn = ({ setNewAccount }) => {
         I don't have an account
       </p>
 
-      <Link className="signLink">Forgot Password</Link>
+      <p className="signLink" onClick={() => forgotPassword()}>
+        Forgot Password
+      </p>
 
       <InputButton
         type="submit"
@@ -102,4 +126,4 @@ const SignIn = ({ setNewAccount }) => {
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);

@@ -9,6 +9,8 @@ import Footer from "./components/footer";
 import NotFound from "./pages/notFound/NotFound";
 import Confirm from "./pages/confirm/Confirm";
 import ConfirmSucess from "./pages/confirm/ConfirmSucess";
+import PasswordEmail from "./pages/changePassword/PasswordEmail";
+import ChangePassword from "./pages/changePassword/ChangePassword";
 
 function App() {
   return (
@@ -24,6 +26,12 @@ function App() {
           exact
           path="/user/confirm/:confirmId"
           component={ConfirmSucess}
+        />
+        <Route exact path="/user/change-password" component={PasswordEmail} />
+        <Route
+          exact
+          path="/user/change-password/:passwordId"
+          component={ChangePassword}
         />
         <Route component={NotFound} />
       </Switch>

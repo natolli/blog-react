@@ -1,16 +1,16 @@
 import React from "react";
-import { ConfirmConatiner } from "./Confirm.styles";
 import { MailSvg } from "../../assets/mail";
+import Info from "../../components/info/Info";
 
 const Confirm = () => {
   return (
-    <ConfirmConatiner>
+    <Info>
       <MailSvg />
       <h1 className="title">
         Almost done , we have sent a confirmation email. Confirm your email to
         login.
       </h1>
-    </ConfirmConatiner>
+    </Info>
   );
 };
 
