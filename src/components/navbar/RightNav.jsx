@@ -12,14 +12,7 @@ const RightNav = ({ open }) => {
   const { data, loading, error } = useQuery(ME);
 
   const [logoutUser, logout] = useMutation(LOGOUT, {
-    update(cache, { data: { logout } }) {
-      cache.writeQuery({
-        query: ME,
-        data: {
-          me: undefined,
-        },
-      });
-    },
+    refetchQueries: [{ query: ME }],
   });
 
   let body = null;
@@ -63,7 +56,7 @@ const RightNav = ({ open }) => {
     body = (
       <>
         <h1 className="name">{data.me.firstName}</h1>
-        <Button modifiers={["small", "primary"]} onClick={handleLogout}>
+        <Button modifiers={["rounded", "secondary"]} onClick={handleLogout}>
           Logout
         </Button>
       </>

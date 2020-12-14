@@ -18,7 +18,8 @@ export const GlobalStyle = createGlobalStyle`
     }
     body{
         font-family: 'Lato', sans-serif;
-        background-color: ${defaultTheme.tertiaryColor}
+        background-color: ${defaultTheme.tertiaryColor};
+        
     }
     
     a{

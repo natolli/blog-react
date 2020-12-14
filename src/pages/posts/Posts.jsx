@@ -1,27 +1,36 @@
 import React from "react";
 import { PostsContainer } from "./Posts.style";
 import { Container } from "../../utils/Global";
+import Card from "../../components/card/Card";
+import { useQuery } from "@apollo/client";
+import { POSTS } from "../../graphql/queries/posts";
+import Loader from "../../components/loader/Loader";
+import Alert from "../../components/alert/Alert";
+import NewPost from "../../components/newPost/NewPost";
 
 const Posts = () => {
+  const { data, loading, error } = useQuery(POSTS, {
+    variables: { limit: 15, cursor: null },
+  });
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Alert>Failed to get posts</Alert>;
+  }
+  if (data) {
+    console.log(data);
+  }
+
   return (
     <PostsContainer>
       <Container>
-        <h1>Hello</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro
-          incidunt illo voluptates facere fuga nostrum voluptatum rem et hic
-          totam quisquam similique necessitatibus repudiandae quis, maxime dolor
-          veritatis vel esse doloremque quam odit, sunt reiciendis eius. Maxime
-          doloremque maiores culpa nobis beatae iure vel, ex perferendis impedit
-          numquam quis provident officiis voluptatem reprehenderit aliquid
-          voluptates quisquam vero quidem rerum consectetur in cumque? Sint
-          cumque adipisci cum quo, dolorum sit quibusdam, voluptate consequuntur
-          ipsa minima enim iste quaerat delectus repudiandae ab! Ducimus
-          praesentium repellat nostrum quia, maiores quibusdam explicabo
-          veritatis eaque doloremque itaque quod, est rem neque blanditiis
-          temporibus at tenetur.
-        </p>
+        <Card />
+        {data && data.posts.posts.map((post) => <Card post={post} />)}
       </Container>
+      <NewPost />
     </PostsContainer>
   );
 };

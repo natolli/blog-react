@@ -6,4 +6,5 @@ export const defaultTheme = {
   tertiaryColor: "#FDFFFC",
   fadeColor: "#CECECE",
   darkFadeColor: "#707070",
+  lightFade: "#f7f2f5",
 };
