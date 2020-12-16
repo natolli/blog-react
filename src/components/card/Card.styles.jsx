@@ -8,6 +8,7 @@ export const CardContainer = styled.div`
   border: 1px solid ${defaultTheme.fadeColor};
   background-color: ${defaultTheme.lightFade};
   color: ${defaultTheme.secondaryColor};
+  overflow-x: hidden;
   @media (max-width: 768px) {
     width: 450px;
   }
@@ -18,7 +19,7 @@ export const CardContainer = styled.div`
       font-weight: 500;
     }
   }
-  
+
   .body {
     width: 100%;
     padding: 20px 10px;

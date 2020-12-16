@@ -13,8 +13,21 @@ const Posts = () => {
     variables: { limit: 15, cursor: null },
   });
 
+  const loadingStyle = {
+    width: "100vw",
+    height: "555px",
+    display: "flex",
+
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
   if (loading) {
-    return <Loader />;
+    return (
+      <div style={loadingStyle}>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
