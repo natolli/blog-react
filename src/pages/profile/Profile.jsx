@@ -47,7 +47,11 @@ const Profile = () => {
   }
   if (data) {
     posts = data.getUserPosts.posts;
-    postUser = data.getUserPosts.posts[0].user;
+    if (data.getUserPosts.posts) {
+      if (data.getUserPosts.posts[0]) {
+        postUser = data.getUserPosts.posts[0].user;
+      }
+    }
   }
   if (MeData) {
     postLength = MeData.me.posts.length;
@@ -57,10 +61,17 @@ const Profile = () => {
     <>
       <ProfileContainer>
         <div className="detail">
-          <div className="first">
-            <h1 className="name">{`${postUser.firstName} ${postUser.lastName}`}</h1>
-            <p className="email">{postUser.email}</p>
-          </div>
+          {postUser ? (
+            <div className="first">
+              <h1 className="name">{`${postUser.firstName} ${postUser.lastName}`}</h1>
+              <p className="email">{postUser.email}</p>
+            </div>
+          ) : (
+            <div className="first">
+              <h1 className="name">{`${MeData.me.firstName} ${MeData.me.lastName}`}</h1>
+              <p className="email">{MeData.me.email}</p>
+            </div>
+          )}
           <div className="second">
             <div className="spam"></div>
             <h2 className="blogged">{`Total Blogged: ${postLength} Posts`}</h2>
