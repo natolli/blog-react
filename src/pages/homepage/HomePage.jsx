@@ -5,8 +5,21 @@ import { ShowCaseSvg } from "../../assets/showcase";
 import HomeCard from "../../components/homeCard/HomeCard";
 import { HomeCard1, HomeCard2 } from "../../assets";
 import Button from "../../components/button/Button";
+import { useQuery } from "@apollo/client";
+import { ME } from "../../graphql/queries/me";
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
+  const { data, loading, error } = useQuery(ME);
+
+  const handleWelcome = () => {
+    if (data && data.me) {
+      history.push("/posts");
+    } else {
+      history.push("signin");
+    }
+    return;
+  };
+
   return (
     <>
       <ShowCase>
@@ -14,7 +27,12 @@ const HomePage = () => {
           <ShowCaseContainer>
             <div className="content">
               <h1 className="title">Post Blogs And Connect With Others.</h1>
-              <Button modifiers="primaryTransparent">Get Started</Button>
+              <Button
+                modifiers="primaryTransparent"
+                onClick={() => handleWelcome()}
+              >
+                Get Started
+              </Button>
             </div>
             <ShowCaseSvg />
           </ShowCaseContainer>

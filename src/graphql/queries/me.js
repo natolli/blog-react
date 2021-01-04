@@ -7,6 +7,9 @@ export const ME = gql`
       email
       firstName
       lastName
+      posts {
+        id
+      }
     }
   }
 `;

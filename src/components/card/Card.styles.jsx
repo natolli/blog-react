@@ -12,8 +12,16 @@ export const CardContainer = styled.div`
   @media (max-width: 768px) {
     width: 450px;
   }
+  .delete-post {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
   .header {
     padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     .name {
       font-size: 2.5rem;
       font-weight: 500;

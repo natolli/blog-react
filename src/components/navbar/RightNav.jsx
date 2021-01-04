@@ -17,6 +17,8 @@ const RightNav = ({ open }) => {
 
   let body = null;
 
+  const handleProfile = () => {};
+
   const handleLogout = () => {
     logoutUser();
   };
@@ -54,12 +56,21 @@ const RightNav = ({ open }) => {
     );
   } else {
     body = (
-      <>
-        <h1 className="name">{data.me.firstName}</h1>
+      <div className="cen">
+        <Link to="/posts" style={{ fontSize: "1.5rem" }} className="name">
+          Home
+        </Link>
+        <Link
+          style={{ fontSize: "1.5rem" }}
+          className="name"
+          to={`/user/${data.me.id}`}
+        >
+          {data.me.firstName}
+        </Link>
         <Button modifiers={["rounded", "secondary"]} onClick={handleLogout}>
           Logout
         </Button>
-      </>
+      </div>
     );
   }
 

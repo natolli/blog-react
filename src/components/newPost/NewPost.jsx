@@ -48,7 +48,6 @@ const NewPost = () => {
   const { title, description } = newPostForm;
 
   const handleUpload = (acceptedFiles) => {
-    console.log(acceptedFiles);
     const reader = new FileReader();
     reader.readAsDataURL(acceptedFiles[0]);
     reader.onloadend = () => {
@@ -78,6 +77,8 @@ const NewPost = () => {
       return;
     }
 
+    setLoading(true);
+
     createPost({
       variables: {
         input: { topics: topicsArray, description, title },
@@ -85,12 +86,11 @@ const NewPost = () => {
       },
     })
       .then(({ data }) => {
-        setLoading(true);
         setTimeout(() => {
           setLoading(false);
           window.location.reload();
           setModal(false);
-        }, 6000);
+        }, 1000);
       })
       .catch((e) => {
         handelAlert(e.message);

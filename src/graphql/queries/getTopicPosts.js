@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const GET_SINGLE_POST = gql`
-  query GetSinglePost($postId: Int!) {
-    getSinglePost(postId: $postId) {
+export const GET_TOPIC_POSTS = gql`
+  query GetTopics($topic: Topic!) {
+    getTopicPosts(topic: $topic) {
       id
       title
       description

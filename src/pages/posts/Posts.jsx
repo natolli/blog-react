@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { PostsContainer } from "./Posts.style";
 import { Container } from "../../utils/Global";
 import Card from "../../components/card/Card";
@@ -6,12 +6,14 @@ import { useQuery } from "@apollo/client";
 import { POSTS } from "../../graphql/queries/posts";
 import Loader from "../../components/loader/Loader";
 import Alert from "../../components/alert/Alert";
-import NewPost from "../../components/newPost/NewPost";
+import Button from "../../components/button/Button";
 
 const Posts = () => {
-  const { data, loading, error } = useQuery(POSTS, {
-    variables: { limit: 15, cursor: null },
+  const { data, loading, error, fetchMore } = useQuery(POSTS, {
+    variables: { limit: 5, cursor: null },
   });
+
+  const [lastPostDate, setLastPostDate] = useState(null);
 
   const loadingStyle = {
     width: "100vw",
@@ -34,7 +36,6 @@ const Posts = () => {
     return <Alert>Failed to get posts</Alert>;
   }
   if (data) {
-    console.log(data);
   }
 
   return (
@@ -43,7 +44,39 @@ const Posts = () => {
         <Card />
         {data && data.posts.posts.map((post) => <Card post={post} />)}
       </Container>
-      <NewPost />
+
+      <div
+        style={{
+          margin: "50px 0",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {data && data.posts.hasMore && (
+          <Button
+            modifiers={["secondary", "rounded"]}
+            onClick={() =>
+              fetchMore({
+                variables: {
+                  limit: 5,
+                  cursor:
+                    data.posts.posts[data.posts.posts.length - 1].createdAt,
+                },
+                updateQuery: (previousData, { fetchMoreResult }) => {
+                  fetchMoreResult.posts.posts = [
+                    ...previousData.posts.posts,
+                    ...fetchMoreResult.posts.posts,
+                  ];
+                  return fetchMoreResult;
+                },
+              })
+            }
+          >
+            Load More
+          </Button>
+        )}
+      </div>
     </PostsContainer>
   );
 };

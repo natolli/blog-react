@@ -12,6 +12,8 @@ import ConfirmSucess from "./pages/confirm/ConfirmSucess";
 import PasswordEmail from "./pages/changePassword/PasswordEmail";
 import ChangePassword from "./pages/changePassword/ChangePassword";
 import CardDetail from "./components/cardDetail/CardDetail";
+import Profile from "./pages/profile/Profile";
+import Topic from "./pages/topic/Topic";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           component={ChangePassword}
         />
         <Route exact path="/test" component={CardDetail} />
+        <Route exact path="/user/:userId" component={Profile} />
+        <Route exact path="/topic/:topicId" component={Topic} />
         <Route component={NotFound} />
       </Switch>
       <Footer />

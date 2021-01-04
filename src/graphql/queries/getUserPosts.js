@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const POSTS = gql`
-  query POSTS($limit: Int!, $cursor: String) {
-    posts(limit: $limit, cursor: $cursor) {
+export const GET_USER_POSTS = gql`
+  query GetUserPost($limit: Int!, $cursor: String, $id: Int!) {
+    getUserPosts(limit: $limit, cursor: $cursor, id: $id) {
       hasMore
       posts {
         id

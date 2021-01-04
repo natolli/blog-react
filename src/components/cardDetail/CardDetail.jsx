@@ -7,6 +7,7 @@ import { Image } from "cloudinary-react";
 import { useMutation } from "@apollo/client";
 import { ADD_COMMENT } from "../../graphql/mutation/addComment";
 import { GET_SINGLE_POST } from "../../graphql/queries/singlePost";
+import Transformation from "cloudinary-react/lib/components/Transformation";
 
 const CardDetail = ({ open, setOpen, post }) => {
   const postIdS = post.id.toString();
@@ -46,7 +47,7 @@ const CardDetail = ({ open, setOpen, post }) => {
         });
       })
       .catch((e) => {
-        // you can do something with the error here
+        console.log(e);
       });
 
     return;
@@ -58,6 +59,9 @@ const CardDetail = ({ open, setOpen, post }) => {
     setDetail({ ...detail, [name]: value });
   };
 
+  const postedDesc =
+    post.description >= 200 ? post.description.slice(0, 200) : post.description;
+
   return (
     open && (
       <CardWrapper>
@@ -68,10 +72,14 @@ const CardDetail = ({ open, setOpen, post }) => {
           <div className="detail">
             <div className="first">
               <h1 className="name">{post.user.firstName}</h1>
-              <Image cloudName="dqjxofmsl" publicId={`${post.imageName}.png`} />
+              <Image
+                cloudName="dqjxofmsl"
+                publicId={post.imageName}
+                height="300"
+              />
               <h1 className="title">{post.title}</h1>
               <p className="description">
-                {post.description}
+                {postedDesc}
                 1975.
               </p>
             </div>

@@ -1,10 +1,13 @@
 import React from "react";
 import { TopicsContainer } from "./TopicsCard.styles";
+import { Link } from "react-router-dom";
 
 const TopicsCard = ({ name }) => {
   return (
     <TopicsContainer to="/topics">
-      <p className="name"># {name}</p>
+      <Link className="name" to={`/topic/${name}`}>
+        # {name}
+      </Link>
     </TopicsContainer>
   );
 };
