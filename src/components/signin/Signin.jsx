@@ -59,6 +59,8 @@ const SignIn = ({ setNewAccount, history }) => {
   }
 
   if (error || forgotPasswordError) {
+    console.log(error);
+
     return (
       <>
         <SignIn />
