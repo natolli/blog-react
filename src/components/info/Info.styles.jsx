@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InfoContainer = styled.div`
-  width: 100vw;
+  width: 200vw;
   height: 555px;
   display: flex;
   flex-direction: column;
