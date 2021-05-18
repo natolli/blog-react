@@ -10,6 +10,7 @@ export const REGISTER = gql`
         firstName
         lastName
       }
+      lik
     }
   }
 `;

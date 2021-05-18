@@ -3,7 +3,7 @@ import { createUploadLink } from "apollo-upload-client";
 import { relayStylePagination } from "@apollo/client/utilities";
 
 const link = new createUploadLink({
-  uri: "https://blog-deep.herokuapp.com/graphql",
+  uri: "http://localhost:4000/graphql",
   credentials: "include",
 });
 

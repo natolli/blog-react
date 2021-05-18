@@ -49,7 +49,11 @@ const SignUp = ({ setNewAccount }) => {
   }
 
   if (data && data.register.user !== null) {
-    return <Redirect to="/user/confirm" />;
+    return (
+      <Redirect
+        to={{ pathname: "/user/confirm", state: { lik: data.register.lik } }}
+      />
+    );
   }
 
   const handleChange = (e) => {
